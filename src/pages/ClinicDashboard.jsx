@@ -4,6 +4,8 @@ import { clinicAPI } from '../services/api';
 import { getUser, logout } from '../services/auth';
 import ScrollFloat from '../components/ScrollFloat';
 import GlareHover from '../components/GlareHover';
+import LoadingSpinner from '../components/LoadingSpinner';
+import FloatingLabelInput from '../components/FloatingLabelInput';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const ClinicDashboard = () => {
@@ -93,27 +95,35 @@ const ClinicDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center relative">
+        <div className="glass-premium rounded-3xl p-12 flex flex-col items-center gap-6">
+          <LoadingSpinner size="lg" />
+          <p className="text-xl font-semibold gradient-text">Loading Dashboard...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-6 relative">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <ScrollFloat>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-              Clinic Dashboard
-            </h1>
+            <div>
+              <h1 className="text-5xl font-extrabold gradient-text mb-2">
+                Clinic Dashboard
+              </h1>
+              <p className="text-gray-700 font-medium">Welcome back, {user?.clinicId}</p>
+            </div>
           </ScrollFloat>
           <div className="flex gap-4 items-center">
-            <span className="text-gray-700 font-semibold">Clinic ID: {user?.clinicId}</span>
+            <div className="glass rounded-xl px-4 py-2">
+              <span className="text-gray-800 font-semibold">🏥 {user?.clinicId}</span>
+            </div>
             <button
               onClick={logout}
-              className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-all"
+              className="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl font-semibold text-white hover:shadow-lg transition-all transform hover:scale-105"
             >
               Logout
             </button>
@@ -123,20 +133,29 @@ const ClinicDashboard = () => {
         {/* Status Card */}
         <ScrollFloat>
           <GlareHover>
-            <div className="glass rounded-xl p-6 mb-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Current Status</h2>
-              <div className="flex items-center gap-4">
-                <div
-                  className={`w-4 h-4 rounded-full ${
-                    status?.status === 'on-time' ? 'bg-green-500' : 'bg-red-500'
-                  }`}
-                />
-                <span className="text-xl">
-                  {status?.status === 'on-time' ? '🟢 On-time' : '🔴 Delayed'}
-                </span>
-                <span className="text-gray-700 ml-auto font-medium">
-                  Last Update: {status?.lastUpdateTime ? formatDate(status.lastUpdateTime) : 'N/A'}
-                </span>
+            <div className="glass-premium rounded-2xl p-8 mb-6 card-premium">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold mb-4 gradient-text">Current Status</h2>
+                  <div className="flex items-center gap-4">
+                    <div
+                      className={`w-6 h-6 rounded-full shadow-lg ${
+                        status?.status === 'on-time' 
+                          ? 'bg-gradient-to-r from-green-400 to-emerald-500 animate-pulse-slow' 
+                          : 'bg-gradient-to-r from-red-400 to-pink-500 animate-pulse-slow'
+                      }`}
+                    />
+                    <span className="text-2xl font-bold">
+                      {status?.status === 'on-time' ? '🟢 On-time' : '🔴 Delayed'}
+                    </span>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm text-gray-600 font-medium mb-1">Last Update</p>
+                  <p className="text-lg font-semibold text-gray-800">
+                    {status?.lastUpdateTime ? formatDate(status.lastUpdateTime) : 'N/A'}
+                  </p>
+                </div>
               </div>
             </div>
           </GlareHover>
@@ -146,63 +165,62 @@ const ClinicDashboard = () => {
           {/* Submit Form */}
           <ScrollFloat>
             <GlareHover>
-              <div className="glass rounded-xl p-6">
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800">Submit Daily Update</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-800">Patient Count</label>
-                    <input
-                      type="number"
-                      value={formData.patientCount}
-                      onChange={(e) => setFormData({ ...formData, patientCount: e.target.value })}
-                      required
-                      min="0"
-                      className="w-full px-4 py-2 bg-white/40 border border-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-600"
-                    />
-                  </div>
+              <div className="glass-premium rounded-2xl p-8 card-premium">
+                <h2 className="text-3xl font-bold mb-6 gradient-text">Submit Daily Update</h2>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <FloatingLabelInput
+                    label="Patient Count"
+                    type="number"
+                    value={formData.patientCount}
+                    onChange={(e) => setFormData({ ...formData, patientCount: e.target.value })}
+                    placeholder="Enter patient count"
+                    required
+                    min="0"
+                  />
+
+                  <FloatingLabelInput
+                    label="Average Fever (°C)"
+                    type="number"
+                    step="0.1"
+                    value={formData.avgFever}
+                    onChange={(e) => setFormData({ ...formData, avgFever: e.target.value })}
+                    placeholder="Enter average fever"
+                    required
+                    min="0"
+                  />
+
+                  <FloatingLabelInput
+                    label="Side Effects (comma-separated)"
+                    type="text"
+                    value={formData.sideEffects}
+                    onChange={(e) => setFormData({ ...formData, sideEffects: e.target.value })}
+                    placeholder="nausea, headache, dizziness"
+                  />
 
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-800">Average Fever (°C)</label>
-                    <input
-                      type="number"
-                      step="0.1"
-                      value={formData.avgFever}
-                      onChange={(e) => setFormData({ ...formData, avgFever: e.target.value })}
-                      required
-                      min="0"
-                      className="w-full px-4 py-2 bg-white/40 border border-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-600"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-800">
-                      Side Effects (comma-separated)
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.sideEffects}
-                      onChange={(e) => setFormData({ ...formData, sideEffects: e.target.value })}
-                      className="w-full px-4 py-2 bg-white/40 border border-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-600"
-                      placeholder="nausea, headache, dizziness"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-800">Notes</label>
+                    <label className="block text-sm font-semibold mb-2 text-gray-800">Notes</label>
                     <textarea
                       value={formData.notes}
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                       rows="3"
-                      className="w-full px-4 py-2 bg-white/40 border border-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-600"
+                      className="input-premium w-full px-4 pt-4 pb-2 rounded-xl text-gray-800 placeholder-gray-500 resize-none"
+                      placeholder="Additional notes..."
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-lg font-semibold hover:from-blue-700 hover:to-cyan-600 transition-all disabled:opacity-50 text-white shadow-lg"
+                    className="btn-premium w-full py-4 rounded-xl font-bold text-lg text-white relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {submitting ? 'Submitting...' : 'Submit Update'}
+                    {submitting ? (
+                      <span className="flex items-center justify-center gap-3">
+                        <LoadingSpinner size="sm" />
+                        <span>Submitting...</span>
+                      </span>
+                    ) : (
+                      <span className="relative z-10">Submit Update →</span>
+                    )}
                   </button>
                 </form>
               </div>
@@ -212,8 +230,8 @@ const ClinicDashboard = () => {
           {/* Chart */}
           <ScrollFloat>
             <GlareHover>
-              <div className="glass rounded-xl p-6">
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800">Symptom Trends</h2>
+              <div className="glass-premium rounded-2xl p-8 card-premium">
+                <h2 className="text-3xl font-bold mb-6 gradient-text">Symptom Trends</h2>
                 {chartData.length > 0 ? (
                   <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={chartData}>
@@ -258,8 +276,8 @@ const ClinicDashboard = () => {
         {/* History Table */}
         <ScrollFloat>
           <GlareHover>
-            <div className="glass rounded-xl p-6 mt-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Submission History</h2>
+            <div className="glass-premium rounded-2xl p-8 mt-6 card-premium">
+              <h2 className="text-3xl font-bold mb-6 gradient-text">Submission History</h2>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>

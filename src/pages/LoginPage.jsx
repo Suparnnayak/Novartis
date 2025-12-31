@@ -5,6 +5,8 @@ import { setAuthToken, setUser } from '../services/auth';
 import ScrollFloat from '../components/ScrollFloat';
 import DarkVeil from '../components/DarkVeil';
 import GlareHover from '../components/GlareHover';
+import FloatingLabelInput from '../components/FloatingLabelInput';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const LoginPage = () => {
   const [role, setRole] = useState('clinic');
@@ -46,100 +48,138 @@ const LoginPage = () => {
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
       <DarkVeil />
       
+      {/* Animated background particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-white/10 blur-xl animate-pulse-slow"
+            style={{
+              width: `${Math.random() * 200 + 50}px`,
+              height: `${Math.random() * 200 + 50}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${Math.random() * 3 + 2}s`,
+            }}
+          />
+        ))}
+      </div>
+      
       <div className="relative z-10 w-full max-w-md px-6">
         <ScrollFloat animationDuration={1}>
           <GlareHover>
-            <div className="glass rounded-2xl p-8 shadow-2xl">
-              <h1 className="text-4xl font-bold mb-2 text-center bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                Clinical Trial Monitor
-              </h1>
-              <p className="text-gray-700 text-center mb-8 font-medium">Sign in to continue</p>
+            <div className="glass-premium rounded-3xl p-10 shadow-2xl animate-float-up">
+              {/* Logo/Title Section */}
+              <div className="text-center mb-8">
+                <div className="inline-block mb-4">
+                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-6 transition-transform">
+                    <span className="text-3xl">🏥</span>
+                  </div>
+                </div>
+                <h1 className="text-5xl font-extrabold mb-3 gradient-text">
+                  Clinical Trial Monitor
+                </h1>
+                <p className="text-gray-700 font-medium text-lg">Sign in to continue</p>
+              </div>
 
-              <div className="mb-6">
-                <div className="flex gap-2 mb-4">
+              {/* Role Selector */}
+              <div className="mb-8">
+                <div className="flex gap-3 p-1 glass rounded-xl">
                   <button
                     type="button"
                     onClick={() => setRole('clinic')}
-                    className={`flex-1 py-2 px-4 rounded-lg transition-all ${
+                    className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all duration-300 ${
                       role === 'clinic'
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-white/30 text-gray-700 hover:bg-white/40'
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform scale-105'
+                        : 'bg-transparent text-gray-700 hover:bg-white/20'
                     }`}
                   >
-                    Clinic
+                    🏥 Clinic
                   </button>
                   <button
                     type="button"
                     onClick={() => setRole('manager')}
-                    className={`flex-1 py-2 px-4 rounded-lg transition-all ${
+                    className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all duration-300 ${
                       role === 'manager'
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-white/30 text-gray-700 hover:bg-white/40'
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform scale-105'
+                        : 'bg-transparent text-gray-700 hover:bg-white/20'
                     }`}
                   >
-                    Manager
+                    👨‍💼 Manager
                   </button>
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="space-y-6">
                 {role === 'clinic' ? (
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Clinic ID</label>
-                    <input
-                      type="text"
-                      value={clinicId}
-                      onChange={(e) => setClinicId(e.target.value)}
-                      required
-                      className="w-full px-4 py-3 bg-white/40 border border-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-600"
-                      placeholder="Enter Clinic ID"
-                    />
-                  </div>
+                  <FloatingLabelInput
+                    label="Clinic ID"
+                    type="text"
+                    value={clinicId}
+                    onChange={(e) => setClinicId(e.target.value)}
+                    placeholder="Enter Clinic ID"
+                    required
+                  />
                 ) : (
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Email</label>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="w-full px-4 py-3 bg-white/40 border border-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-600"
-                      placeholder="manager@example.com"
-                    />
-                  </div>
+                  <FloatingLabelInput
+                    label="Email Address"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="manager@example.com"
+                    required
+                  />
                 )}
 
-                <div>
-                  <label className="block text-sm font-medium mb-2">Password</label>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                      className="w-full px-4 py-3 bg-white/40 border border-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-600"
-                      placeholder="Enter password"
-                  />
-                </div>
+                <FloatingLabelInput
+                  label="Password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter password"
+                  required
+                />
 
                 {error && (
-                  <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-3 text-red-300 text-sm">
-                    {error}
+                  <div className="bg-red-500/20 border-2 border-red-500/50 rounded-xl p-4 text-red-700 font-medium text-sm animate-float-up backdrop-blur-sm">
+                    <div className="flex items-center gap-2">
+                      <span>⚠️</span>
+                      <span>{error}</span>
+                    </div>
                   </div>
                 )}
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-lg font-semibold hover:from-blue-700 hover:to-cyan-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-white shadow-lg"
+                  className="btn-premium w-full py-4 rounded-xl font-bold text-lg text-white relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {loading ? 'Signing in...' : 'Sign In'}
+                  {loading ? (
+                    <span className="flex items-center justify-center gap-3">
+                      <LoadingSpinner size="sm" />
+                      <span>Signing in...</span>
+                    </span>
+                  ) : (
+                    <span className="relative z-10">Sign In →</span>
+                  )}
                 </button>
               </form>
 
-              <div className="mt-6 text-center text-sm text-gray-700 font-medium">
-                <p>Demo Credentials:</p>
-                <p className="mt-2">Clinic: clinic1 / password123</p>
-                <p>Manager: manager@demo.com / manager123</p>
+              {/* Demo Credentials */}
+              <div className="mt-8 pt-6 border-t border-white/20">
+                <p className="text-center text-sm text-gray-700 font-semibold mb-3">Demo Credentials</p>
+                <div className="space-y-2 text-xs">
+                  <div className="glass rounded-lg p-3 text-center">
+                    <p className="font-semibold text-gray-800">Clinic:</p>
+                    <p className="text-gray-600">clinic1 / password123</p>
+                  </div>
+                  <div className="glass rounded-lg p-3 text-center">
+                    <p className="font-semibold text-gray-800">Manager:</p>
+                    <p className="text-gray-600">manager@demo.com / manager123</p>
+                  </div>
+                </div>
               </div>
             </div>
           </GlareHover>
@@ -150,4 +190,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-

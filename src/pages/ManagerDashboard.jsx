@@ -4,6 +4,7 @@ import { managerAPI } from '../services/api';
 import { getUser, logout } from '../services/auth';
 import ScrollFloat from '../components/ScrollFloat';
 import GlareHover from '../components/GlareHover';
+import LoadingSpinner from '../components/LoadingSpinner';
 import {
   BarChart,
   Bar,
@@ -91,8 +92,11 @@ const ManagerDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center relative">
+        <div className="glass-premium rounded-3xl p-12 flex flex-col items-center gap-6">
+          <LoadingSpinner size="lg" />
+          <p className="text-xl font-semibold gradient-text">Loading Dashboard...</p>
+        </div>
       </div>
     );
   }
@@ -131,20 +135,25 @@ const ManagerDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-6 relative">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <ScrollFloat>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-              Manager Dashboard
-            </h1>
+            <div>
+              <h1 className="text-5xl font-extrabold gradient-text mb-2">
+                Manager Dashboard
+              </h1>
+              <p className="text-gray-700 font-medium">Welcome back, {user?.email}</p>
+            </div>
           </ScrollFloat>
           <div className="flex gap-4 items-center">
-            <span className="text-gray-700 font-semibold">Manager: {user?.email}</span>
+            <div className="glass rounded-xl px-4 py-2">
+              <span className="text-gray-800 font-semibold">👨‍💼 Manager</span>
+            </div>
             <button
               onClick={logout}
-              className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-all"
+              className="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl font-semibold text-white hover:shadow-lg transition-all transform hover:scale-105"
             >
               Logout
             </button>
@@ -152,20 +161,26 @@ const ManagerDashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <ScrollFloat>
             <GlareHover>
-              <div className="glass rounded-xl p-4">
-                <div className="text-gray-700 text-sm font-medium">Total Clinics</div>
-                <div className="text-3xl font-bold text-gray-800">{analytics?.totalClinics || 0}</div>
+              <div className="glass-premium rounded-2xl p-6 card-premium">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-gray-700 text-sm font-semibold uppercase tracking-wide">Total Clinics</div>
+                  <div className="text-2xl">🏥</div>
+                </div>
+                <div className="text-4xl font-extrabold gradient-text">{analytics?.totalClinics || 0}</div>
               </div>
             </GlareHover>
           </ScrollFloat>
           <ScrollFloat>
             <GlareHover>
-              <div className="glass rounded-xl p-4">
-                <div className="text-gray-700 text-sm font-medium">Delayed Clinics</div>
-                <div className="text-3xl font-bold text-red-600">
+              <div className="glass-premium rounded-2xl p-6 card-premium">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-gray-700 text-sm font-semibold uppercase tracking-wide">Delayed</div>
+                  <div className="text-2xl">⚠️</div>
+                </div>
+                <div className="text-4xl font-extrabold text-red-600">
                   {analytics?.delayedClinics || 0}
                 </div>
               </div>
@@ -173,17 +188,23 @@ const ManagerDashboard = () => {
           </ScrollFloat>
           <ScrollFloat>
             <GlareHover>
-              <div className="glass rounded-xl p-4">
-                <div className="text-gray-700 text-sm font-medium">Active Alerts</div>
-                <div className="text-3xl font-bold text-yellow-600">{alerts.length}</div>
+              <div className="glass-premium rounded-2xl p-6 card-premium">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-gray-700 text-sm font-semibold uppercase tracking-wide">Alerts</div>
+                  <div className="text-2xl">🚨</div>
+                </div>
+                <div className="text-4xl font-extrabold text-yellow-600">{alerts.length}</div>
               </div>
             </GlareHover>
           </ScrollFloat>
           <ScrollFloat>
             <GlareHover>
-              <div className="glass rounded-xl p-4">
-                <div className="text-gray-700 text-sm font-medium">Global Avg Fever</div>
-                <div className="text-3xl font-bold text-gray-800">
+              <div className="glass-premium rounded-2xl p-6 card-premium">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-gray-700 text-sm font-semibold uppercase tracking-wide">Avg Fever</div>
+                  <div className="text-2xl">🌡️</div>
+                </div>
+                <div className="text-4xl font-extrabold gradient-text">
                   {analytics?.globalAvgFever?.toFixed(2) || '0.00'}°C
                 </div>
               </div>
@@ -196,8 +217,8 @@ const ManagerDashboard = () => {
           {/* Delay Bar Chart */}
           <ScrollFloat>
             <GlareHover>
-              <div className="glass rounded-xl p-6">
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+              <div className="glass-premium rounded-2xl p-8 card-premium">
+                <h2 className="text-3xl font-bold mb-6 gradient-text">
                   Clinic vs Last Update Delay (Hours)
                 </h2>
                 {delayBarData.length > 0 ? (
@@ -229,8 +250,8 @@ const ManagerDashboard = () => {
           {/* Risk Pie Chart */}
           <ScrollFloat>
             <GlareHover>
-              <div className="glass rounded-xl p-6">
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800">Clinics by Risk Level</h2>
+              <div className="glass-premium rounded-2xl p-8 card-premium">
+                <h2 className="text-3xl font-bold mb-6 gradient-text">Clinics by Risk Level</h2>
                 {riskPieData.some((d) => d.value > 0) ? (
                   <ResponsiveContainer width="100%" height={300}>
                     <PieChart>
@@ -273,8 +294,8 @@ const ManagerDashboard = () => {
         {/* Fever Trends Line Chart */}
         <ScrollFloat>
           <GlareHover>
-            <div className="glass rounded-xl p-6 mb-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Average Fever Trends (Multi-Clinic)</h2>
+            <div className="glass-premium rounded-2xl p-8 mb-6 card-premium">
+              <h2 className="text-3xl font-bold mb-6 gradient-text">Average Fever Trends (Multi-Clinic)</h2>
               {feverTrendsData.length > 0 ? (
                 <ResponsiveContainer width="100%" height={400}>
                   <LineChart data={feverTrendsData}>
@@ -315,8 +336,8 @@ const ManagerDashboard = () => {
           {/* Clinics Table */}
           <ScrollFloat>
             <GlareHover>
-              <div className="glass rounded-xl p-6">
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800">All Clinics</h2>
+              <div className="glass-premium rounded-2xl p-8 card-premium">
+                <h2 className="text-3xl font-bold mb-6 gradient-text">All Clinics</h2>
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
@@ -363,8 +384,8 @@ const ManagerDashboard = () => {
           {/* Alerts Panel */}
           <ScrollFloat>
             <GlareHover>
-              <div className="glass rounded-xl p-6">
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800">Active Alerts</h2>
+              <div className="glass-premium rounded-2xl p-8 card-premium">
+                <h2 className="text-3xl font-bold mb-6 gradient-text">Active Alerts</h2>
                 <div className="space-y-3 max-h-[500px] overflow-y-auto">
                   {alerts.length > 0 ? (
                     alerts.map((alert) => (
