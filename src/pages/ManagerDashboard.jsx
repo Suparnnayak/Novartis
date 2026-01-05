@@ -339,7 +339,7 @@ const ManagerDashboard = () => {
           {/* Risk Pie Chart */}
           <ScrollFloat>
             <GlareHover>
-              <div className="bg-gradient-to-br from-white to-purple-50/50 rounded-2xl p-8 shadow-xl border border-purple-100 hover:shadow-2xl transition-all">
+              <div className="bg-gradient-to-br from-white to-purple-50/50 rounded-2xl p-6 md:p-8 shadow-md border border-purple-100 transition-all">
                 <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Clinics by Risk Level</h2>
                 {riskPieData.some((d) => d.value > 0) ? (
                   <div className="w-full h-64 md:h-[350px]">
@@ -361,6 +361,7 @@ const ManagerDashboard = () => {
                         ))}
                       </Pie>
                       <Tooltip
+                        formatter={(value) => (typeof value === 'number' ? value.toFixed(1) : value)}
                         contentStyle={{
                           backgroundColor: 'rgba(255, 255, 255, 0.98)',
                           border: '2px solid rgba(168, 85, 247, 0.3)',
@@ -388,7 +389,7 @@ const ManagerDashboard = () => {
         {/* Fever Trends Line Chart */}
         <ScrollFloat>
           <GlareHover>
-            <div className="bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 rounded-2xl p-8 mb-6 shadow-xl border border-blue-100 hover:shadow-2xl transition-all">
+            <div className="bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 rounded-2xl p-6 md:p-8 mb-6 shadow-md border border-blue-100 transition-all">
               <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Average Fever Trends (Multi-Clinic)</h2>
               {feverTrendsData.length > 0 ? (
                 <div className="w-full h-72 md:h-[420px]">
@@ -398,6 +399,7 @@ const ManagerDashboard = () => {
                     <XAxis dataKey="date" stroke="#64748b" style={{ fontSize: '13px', fontWeight: '600' }} />
                     <YAxis stroke="#64748b" style={{ fontSize: '13px', fontWeight: '600' }} />
                     <Tooltip
+                      formatter={(value) => (typeof value === 'number' ? Number(value).toFixed(1) : value)}
                       contentStyle={{
                         backgroundColor: 'rgba(255, 255, 255, 0.98)',
                         border: '2px solid rgba(59, 130, 246, 0.3)',

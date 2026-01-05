@@ -183,20 +183,20 @@ const ClinicDashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-white/80 backdrop-blur rounded-xl p-4 border border-blue-100">
               <p className="text-sm text-gray-600 font-semibold">Total Submissions</p>
-              <p className="text-3xl font-bold gradient-text mt-2">{updates.length}</p>
+              <p className="text-2xl md:text-3xl font-bold gradient-text mt-2">{updates.length}</p>
               <p className="text-xs text-gray-500 mt-2">Recorded updates</p>
             </div>
             <div className="bg-white/80 backdrop-blur rounded-xl p-4 border border-purple-100">
               <p className="text-sm text-gray-600 font-semibold">Avg Participation</p>
-              <p className="text-3xl font-bold text-purple-600 mt-2">
+              <p className="text-2xl md:text-3xl font-bold text-purple-600 mt-2">
                 {updates.length > 0 ? (updates.reduce((sum, u) => sum + u.patientCount, 0) / updates.length).toFixed(0) : '0'}
               </p>
               <p className="text-xs text-gray-500 mt-2">Patients per update</p>
             </div>
             <div className="bg-white/80 backdrop-blur rounded-xl p-4 border border-pink-100">
               <p className="text-sm text-gray-600 font-semibold">Latest Fever</p>
-              <p className="text-3xl font-bold text-pink-600 mt-2">
-                {updates.length > 0 ? updates[updates.length - 1]?.avgFever || '0' : '0'}°C
+              <p className="text-2xl md:text-3xl font-bold text-pink-600 mt-2">
+                {updates.length > 0 ? Number(updates[updates.length - 1]?.avgFever || 0).toFixed(1) : '0.0'}°C
               </p>
               <p className="text-xs text-gray-500 mt-2">Most recent reading</p>
             </div>
@@ -288,7 +288,7 @@ const ClinicDashboard = () => {
           {/* Chart */}
           <ScrollFloat>
             <GlareHover>
-              <div className="bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30 rounded-2xl p-8 shadow-xl border border-purple-100 hover:shadow-2xl transition-all">
+              <div className="bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30 rounded-2xl p-6 md:p-8 shadow-md border border-purple-100 transition-all">
                   <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Symptom Trends</h2>
                   {chartData.length > 0 ? (
                     <div className="w-full h-64 md:h-[380px]">
@@ -298,6 +298,7 @@ const ClinicDashboard = () => {
                       <XAxis dataKey="date" stroke="#64748b" style={{ fontSize: '13px', fontWeight: '600' }} />
                       <YAxis stroke="#64748b" style={{ fontSize: '13px', fontWeight: '600' }} />
                       <Tooltip
+                        formatter={(value) => (typeof value === 'number' ? Number(value).toFixed(1) : value)}
                         contentStyle={{
                           backgroundColor: 'rgba(255, 255, 255, 0.98)',
                           border: '2px solid rgba(59, 130, 246, 0.3)',

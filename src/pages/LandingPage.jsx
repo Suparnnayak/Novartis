@@ -13,11 +13,14 @@ const LandingPage = () => {
           <button onClick={() => navigate('/')} className="flex items-center gap-3 focus:outline-none">
             <span className="text-lg md:text-2xl font-bold text-slate-800">TrialGuard AI</span>
           </button>
-          <div className="flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3">
             <span className="px-3 py-1.5 bg-yellow-100 text-yellow-800 rounded-lg text-sm font-semibold">Demo mode</span>
             <button onClick={() => navigate('/login')} className="px-3 py-1 text-gray-700 hover:text-gray-900 font-medium">Login</button>
             <button onClick={() => navigate('/login')} className="px-3 py-1 text-gray-700 hover:text-gray-900 font-medium">Clinic</button>
             <button onClick={() => navigate('/login')} className="px-4 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-sm">Manager</button>
+          </div>
+          <div className="md:hidden flex items-center">
+            <button onClick={() => navigate('/login')} className="px-3 py-2 bg-blue-600 text-white rounded-md">Menu</button>
           </div>
         </div>
       </header>
