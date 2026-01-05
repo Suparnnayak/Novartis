@@ -144,33 +144,33 @@ const ManagerDashboard = () => {
       </div>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <ScrollFloat>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <button
                 onClick={() => navigate('/')}
-                className="group flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-50 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-200"
+                className="group flex items-center gap-2 px-3 py-2 bg-white hover:bg-gray-50 rounded-lg shadow-sm transition-all border border-gray-200"
               >
-                <svg className="w-5 h-5 text-gray-600 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-gray-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                <span className="font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">Home</span>
+                <span className="font-semibold text-gray-700">Home</span>
               </button>
               <div>
-                <h1 className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
+                <h1 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-1">
                   Manager Dashboard
                 </h1>
                 <p className="text-gray-700 font-medium">Welcome back, {user?.email}</p>
               </div>
             </div>
           </ScrollFloat>
-          <div className="flex gap-4 items-center">
-            <div className="bg-white rounded-xl px-4 py-2 shadow-md border border-gray-200">
+          <div className="flex gap-3 items-center">
+            <div className="bg-white rounded-lg px-3 py-1 shadow-sm border border-gray-200">
               <span className="text-gray-800 font-semibold">👨‍💼 Manager</span>
             </div>
             <button
               onClick={logout}
-              className="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl font-semibold text-white hover:shadow-lg transition-all transform hover:scale-105"
+              className="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 rounded-lg font-semibold text-white hover:shadow-sm transition-all"
             >
               Logout
             </button>
@@ -181,14 +181,14 @@ const ManagerDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <ScrollFloat>
             <GlareHover>
-              <div className="group relative bg-gradient-to-br from-white via-blue-50/50 to-indigo-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-blue-100 hover:border-blue-300 overflow-hidden hover:scale-105">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-indigo-400/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="group relative bg-gradient-to-br from-white via-blue-50/50 to-indigo-50 rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-indigo-400/10 rounded-full blur-2xl transition-transform duration-500"></div>
                 <div className="relative">
                   <div className="flex items-center justify-between mb-3">
                     <div className="text-xs font-bold uppercase tracking-wider text-blue-700">Total Clinics</div>
-                    <div className="text-3xl group-hover:scale-110 transition-transform">🏥</div>
+                    <div className="text-3xl transition-transform">🏥</div>
                   </div>
-                  <div className="text-6xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">
+                  <div className="text-4xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2 transition-transform">
                     {analytics?.totalClinics || 0}
                   </div>
                   <div className="flex items-center gap-2 text-sm">
@@ -202,14 +202,14 @@ const ManagerDashboard = () => {
           
           <ScrollFloat>
             <GlareHover>
-              <div className="group relative bg-gradient-to-br from-white via-red-50/50 to-orange-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 hover:border-red-300 overflow-hidden hover:scale-105">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-400/10 to-orange-400/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="group relative bg-gradient-to-br from-white via-red-50/50 to-orange-50 rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-red-100 overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-400/10 to-orange-400/10 rounded-full blur-2xl transition-transform duration-500"></div>
                 <div className="relative">
                   <div className="flex items-center justify-between mb-3">
                     <div className="text-xs font-bold uppercase tracking-wider text-red-700">Delayed</div>
-                    <div className="text-3xl animate-pulse group-hover:scale-110 transition-transform">⚠️</div>
+                    <div className="text-3xl animate-pulse transition-transform">⚠️</div>
                   </div>
-                  <div className="text-6xl font-black bg-gradient-to-r from-red-600 via-orange-600 to-red-700 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">
+                  <div className="text-4xl md:text-6xl font-black bg-gradient-to-r from-red-600 via-orange-600 to-red-700 bg-clip-text text-transparent mb-2 transition-transform">
                     {analytics?.delayedClinics || 0}
                   </div>
                   <div className="flex items-center gap-2 text-sm">
@@ -223,14 +223,14 @@ const ManagerDashboard = () => {
           
           <ScrollFloat>
             <GlareHover>
-              <div className="group relative bg-gradient-to-br from-white via-yellow-50/50 to-amber-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-yellow-100 hover:border-yellow-300 overflow-hidden hover:scale-105">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400/10 to-amber-400/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="group relative bg-gradient-to-br from-white via-yellow-50/50 to-amber-50 rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-yellow-100 overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400/10 to-amber-400/10 rounded-full blur-2xl transition-transform duration-500"></div>
                 <div className="relative">
                   <div className="flex items-center justify-between mb-3">
                     <div className="text-xs font-bold uppercase tracking-wider text-yellow-700">Active Alerts</div>
                     <div className="text-3xl group-hover:rotate-12 transition-transform">🚨</div>
                   </div>
-                  <div className="text-6xl font-black bg-gradient-to-r from-yellow-600 via-amber-600 to-orange-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">
+                  <div className="text-4xl md:text-6xl font-black bg-gradient-to-r from-yellow-600 via-amber-600 to-orange-600 bg-clip-text text-transparent mb-2 transition-transform">
                     {alerts.length}
                   </div>
                   <div className="flex items-center gap-2 text-sm">
@@ -244,14 +244,14 @@ const ManagerDashboard = () => {
           
           <ScrollFloat>
             <GlareHover>
-              <div className="group relative bg-gradient-to-br from-white via-purple-50/50 to-pink-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-purple-100 hover:border-purple-300 overflow-hidden hover:scale-105">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="group relative bg-gradient-to-br from-white via-purple-50/50 to-pink-50 rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-purple-100 overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-2xl transition-transform duration-500"></div>
                 <div className="relative">
                   <div className="flex items-center justify-between mb-3">
                     <div className="text-xs font-bold uppercase tracking-wider text-purple-700">Avg Fever</div>
-                    <div className="text-3xl group-hover:scale-110 transition-transform">🌡️</div>
+                    <div className="text-3xl transition-transform">🌡️</div>
                   </div>
-                  <div className="text-5xl font-black bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">
+                  <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent mb-2 transition-transform">
                     {analytics?.globalAvgFever?.toFixed(2) || '0.00'}°C
                   </div>
                   <div className="flex items-center gap-2 text-sm">
@@ -292,12 +292,13 @@ const ManagerDashboard = () => {
           <ScrollFloat>
             <GlareHover>
               <div className="bg-gradient-to-br from-white to-red-50/50 rounded-2xl p-8 shadow-xl border border-red-100 hover:shadow-2xl transition-all">
-                <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+                <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
                   Clinic Delay Status (Hours)
                 </h2>
                 {delayBarData.length > 0 ? (
-                  <ResponsiveContainer width="100%" height={350}>
-                    <BarChart data={delayBarData} margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
+                  <div className="w-full h-64 md:h-[350px]">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={delayBarData} margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
                       <CartesianGrid strokeDasharray="4 4" stroke="rgba(200, 200, 200, 0.2)" />
                       <XAxis dataKey="clinicId" stroke="#64748b" style={{ fontSize: '13px', fontWeight: '600' }} />
                       <YAxis stroke="#64748b" style={{ fontSize: '13px', fontWeight: '600' }} />
@@ -320,9 +321,10 @@ const ManagerDashboard = () => {
                         </linearGradient>
                       </defs>
                     </BarChart>
-                  </ResponsiveContainer>
+                    </ResponsiveContainer>
+                  </div>
                 ) : (
-                  <div className="h-[350px] flex items-center justify-center">
+                  <div className="h-64 md:h-[350px] flex items-center justify-center">
                     <div className="text-center">
                       <div className="text-6xl mb-4">📊</div>
                       <p className="text-gray-700 font-medium text-lg">No delay data available</p>
@@ -340,8 +342,9 @@ const ManagerDashboard = () => {
               <div className="bg-gradient-to-br from-white to-purple-50/50 rounded-2xl p-8 shadow-xl border border-purple-100 hover:shadow-2xl transition-all">
                 <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Clinics by Risk Level</h2>
                 {riskPieData.some((d) => d.value > 0) ? (
-                  <ResponsiveContainer width="100%" height={350}>
-                    <PieChart margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
+                  <div className="w-full h-64 md:h-[350px]">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
                       <Pie
                         data={riskPieData}
                         cx="50%"
@@ -366,9 +369,10 @@ const ManagerDashboard = () => {
                         }}
                       />
                     </PieChart>
-                  </ResponsiveContainer>
+                    </ResponsiveContainer>
+                  </div>
                 ) : (
-                  <div className="h-[350px] flex items-center justify-center">
+                  <div className="h-64 md:h-[350px] flex items-center justify-center">
                     <div className="text-center">
                       <div className="text-6xl mb-4">📈</div>
                       <p className="text-gray-700 font-medium text-lg">No risk data available</p>
@@ -385,10 +389,11 @@ const ManagerDashboard = () => {
         <ScrollFloat>
           <GlareHover>
             <div className="bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 rounded-2xl p-8 mb-6 shadow-xl border border-blue-100 hover:shadow-2xl transition-all">
-              <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Average Fever Trends (Multi-Clinic)</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Average Fever Trends (Multi-Clinic)</h2>
               {feverTrendsData.length > 0 ? (
-                <ResponsiveContainer width="100%" height={420}>
-                  <LineChart data={feverTrendsData} margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
+                <div className="w-full h-72 md:h-[420px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={feverTrendsData} margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
                     <CartesianGrid strokeDasharray="4 4" stroke="rgba(200, 200, 200, 0.2)" />
                     <XAxis dataKey="date" stroke="#64748b" style={{ fontSize: '13px', fontWeight: '600' }} />
                     <YAxis stroke="#64748b" style={{ fontSize: '13px', fontWeight: '600' }} />
@@ -418,9 +423,10 @@ const ManagerDashboard = () => {
                       />
                     ))}
                   </LineChart>
-                </ResponsiveContainer>
+                  </ResponsiveContainer>
+                </div>
               ) : (
-                <div className="h-[420px] flex items-center justify-center">
+                <div className="h-72 md:h-[420px] flex items-center justify-center">
                   <div className="text-center">
                     <div className="text-6xl mb-4">🌡️</div>
                     <p className="text-gray-700 font-medium text-lg">No fever trend data available</p>
@@ -539,7 +545,7 @@ const ManagerDashboard = () => {
                           </div>
                           <button
                             onClick={() => handleResolveAlert(alert._id)}
-                            className="ml-4 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-lg text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all transform hover:scale-105 active:scale-95 whitespace-nowrap"
+                            className="ml-4 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-lg text-sm font-semibold text-white shadow-sm hover:shadow-md transition-all whitespace-nowrap"
                           >
                             ✓ Resolve
                           </button>

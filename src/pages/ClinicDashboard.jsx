@@ -126,7 +126,7 @@ const ClinicDashboard = () => {
                 <span className="font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">Home</span>
               </button>
               <div>
-                <h1 className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
+                <h1 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
                   Clinic Dashboard
                 </h1>
                 <p className="text-gray-700 font-medium">Welcome back, {user?.clinicId}</p>
@@ -134,12 +134,12 @@ const ClinicDashboard = () => {
             </div>
           </ScrollFloat>
           <div className="flex gap-4 items-center">
-            <div className="bg-white rounded-xl px-4 py-2 shadow-md border border-gray-200">
+            <div className="bg-white rounded-xl px-4 py-2 shadow-sm border border-gray-200">
               <span className="text-gray-800 font-semibold">🏥 {user?.clinicId}</span>
             </div>
             <button
               onClick={logout}
-              className="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl font-semibold text-white hover:shadow-lg transition-all transform hover:scale-105"
+              className="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl font-semibold text-white hover:shadow-md transition-all"
             >
               Logout
             </button>
@@ -289,10 +289,11 @@ const ClinicDashboard = () => {
           <ScrollFloat>
             <GlareHover>
               <div className="bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30 rounded-2xl p-8 shadow-xl border border-purple-100 hover:shadow-2xl transition-all">
-                <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Symptom Trends</h2>
-                {chartData.length > 0 ? (
-                  <ResponsiveContainer width="100%" height={380}>
-                    <LineChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Symptom Trends</h2>
+                  {chartData.length > 0 ? (
+                    <div className="w-full h-64 md:h-[380px]">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
                       <CartesianGrid strokeDasharray="4 4" stroke="rgba(200, 200, 200, 0.2)" />
                       <XAxis dataKey="date" stroke="#64748b" style={{ fontSize: '13px', fontWeight: '600' }} />
                       <YAxis stroke="#64748b" style={{ fontSize: '13px', fontWeight: '600' }} />
@@ -330,9 +331,10 @@ const ClinicDashboard = () => {
                         animationDuration={500}
                       />
                     </LineChart>
-                  </ResponsiveContainer>
+                    </ResponsiveContainer>
+                  </div>
                 ) : (
-                  <div className="h-[380px] flex items-center justify-center">
+                  <div className="h-64 md:h-[380px] flex items-center justify-center">
                     <div className="text-center">
                       <div className="text-6xl mb-4">📊</div>
                       <p className="text-gray-700 font-medium text-lg">No data available yet</p>

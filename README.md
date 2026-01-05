@@ -1,4 +1,4 @@
-# Clinical Trial Monitoring System
+# TrialGuard AI — Clinical Trial Monitoring System
 
 A modern React application for monitoring clinical trials across multiple clinics. Features real-time dashboards, automated delay detection, and anomaly alerts with a beautiful sky blue UI.
 

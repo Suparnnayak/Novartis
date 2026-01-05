@@ -252,3 +252,25 @@ code {
     0 25px 50px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
+
+/* Ensure images and svgs scale inside nav/headers */
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* page content padding so sticky nav doesn't overlap on small screens */
+.page-with-nav {
+  padding-top: 72px; /* nav height + spacing */
+}
+
+/* Utility: stack CTA buttons on small screens */
+.cta-stack-sm {
+  display: flex;
+  gap: 1rem;
+}
+@media (max-width: 640px) {
+  .cta-stack-sm {
+    flex-direction: column;
+  }
+}

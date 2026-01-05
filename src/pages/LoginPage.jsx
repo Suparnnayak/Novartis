@@ -43,9 +43,12 @@ const LoginPage = () => {
                   <span className="text-5xl">🏥</span>
                 </div>
               </div>
-              <h1 className="text-6xl font-extrabold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight">
-                Clinical Trial Monitor
-              </h1>
+              <div className="flex items-center justify-center lg:justify-start gap-4 mb-4">
+                <div className="hidden md:block" />
+                <h1 className="text-2xl md:text-6xl font-extrabold leading-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  TrialGuard AI
+                </h1>
+              </div>
               <p className="text-xl text-gray-600 mb-8">
                 Real-time safety monitoring and compliance tracking for clinical trials
               </p>
@@ -65,10 +68,10 @@ const LoginPage = () => {
           {/* Right side - Login Form */}
           <ScrollFloat delay={200}>
             <GlareHover>
-              <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-10 shadow-2xl border border-white/50 hover:shadow-3xl transition-all duration-500">
+              <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-10 shadow-md border border-white/50 transition-all duration-500">
                 <div className="text-center mb-8">
                   <div className="inline-block mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-xl animate-pulse">
+                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-md bg-white/30 backdrop-blur-sm">
                       <span className="text-3xl">🏥</span>
                     </div>
                   </div>
@@ -82,14 +85,14 @@ const LoginPage = () => {
                     <button
                       type="button"
                       onClick={() => setRole('clinic')}
-                      className={`group relative p-6 rounded-2xl border-2 transition-all duration-500 ${
+                      className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 ${
                         role === 'clinic'
-                          ? 'border-blue-500 bg-gradient-to-br from-blue-50 via-purple-50 to-blue-50 shadow-2xl scale-105 ring-4 ring-blue-100'
-                          : 'border-gray-200 hover:border-blue-300 hover:shadow-xl hover:scale-102'
+                          ? 'border-blue-500 bg-gradient-to-br from-blue-50 via-purple-50 to-blue-50 shadow-md ring-2 ring-blue-100'
+                          : 'border-gray-200 hover:border-blue-300 shadow-sm'
                       }`}
                     >
                       <div className="text-center">
-                        <div className={`text-5xl mb-3 transition-all duration-500 ${role === 'clinic' ? 'scale-125 animate-bounce' : 'group-hover:scale-110'}`}>
+                        <div className={`text-5xl mb-3 transition-all duration-300 ${role === 'clinic' ? 'scale-110 animate-bounce' : ''}`}>
                           🏥
                         </div>
                         <div className={`font-bold text-lg ${role === 'clinic' ? 'text-blue-600' : 'text-gray-700 group-hover:text-blue-600'}`}>
@@ -109,14 +112,14 @@ const LoginPage = () => {
                     <button
                       type="button"
                       onClick={() => setRole('manager')}
-                      className={`group relative p-6 rounded-2xl border-2 transition-all duration-500 ${
+                      className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 ${
                         role === 'manager'
-                          ? 'border-purple-500 bg-gradient-to-br from-purple-50 via-pink-50 to-purple-50 shadow-2xl scale-105 ring-4 ring-purple-100'
-                          : 'border-gray-200 hover:border-purple-300 hover:shadow-xl hover:scale-102'
+                          ? 'border-purple-500 bg-gradient-to-br from-purple-50 via-pink-50 to-purple-50 shadow-md ring-2 ring-purple-100'
+                          : 'border-gray-200 hover:border-purple-300 shadow-sm'
                       }`}
                     >
                       <div className="text-center">
-                        <div className={`text-5xl mb-3 transition-all duration-500 ${role === 'manager' ? 'scale-125 animate-bounce' : 'group-hover:scale-110'}`}>
+                        <div className={`text-5xl mb-3 transition-all duration-300 ${role === 'manager' ? 'scale-110 animate-bounce' : ''}`}>
                           👨‍💼
                         </div>
                         <div className={`font-bold text-lg ${role === 'manager' ? 'text-purple-600' : 'text-gray-700 group-hover:text-purple-600'}`}>
@@ -163,7 +166,7 @@ const LoginPage = () => {
                 {/* Quick Access Button */}
                 <button
                   onClick={handleQuickLogin}
-                  className="group relative w-full py-5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 active:scale-95 overflow-hidden"
+                  className="group relative w-full py-5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-xl font-bold text-lg shadow-md hover:shadow-lg transition-all overflow-hidden"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
                   <span className="relative flex items-center justify-center gap-2">

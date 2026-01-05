@@ -10,12 +10,14 @@ const LandingPage = () => {
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-blue-600">Clinical Trial Monitor</h1>
+          <button onClick={() => navigate('/')} className="flex items-center gap-3 focus:outline-none">
+            <span className="text-lg md:text-2xl font-bold text-slate-800">TrialGuard AI</span>
+          </button>
           <div className="flex items-center gap-3">
             <span className="px-3 py-1.5 bg-yellow-100 text-yellow-800 rounded-lg text-sm font-semibold">Demo mode</span>
-            <button onClick={() => navigate('/login')} className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium">Login</button>
-            <button onClick={() => navigate('/login')} className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium">Clinic</button>
-            <button onClick={() => navigate('/login')} className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold">Manager</button>
+            <button onClick={() => navigate('/login')} className="px-3 py-1 text-gray-700 hover:text-gray-900 font-medium">Login</button>
+            <button onClick={() => navigate('/login')} className="px-3 py-1 text-gray-700 hover:text-gray-900 font-medium">Clinic</button>
+            <button onClick={() => navigate('/login')} className="px-4 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-sm">Manager</button>
           </div>
         </div>
       </header>
@@ -28,32 +30,32 @@ const LandingPage = () => {
               <span className="w-2 h-2 bg-green-500 rounded-full"></span>
               Premium staff-only portal
             </div>
-            <h2 className="text-6xl font-extrabold leading-tight mb-6">
+            <h2 className="text-3xl md:text-6xl font-extrabold leading-tight mb-6">
               Accelerate your trials with an{' '}
               <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 bg-clip-text text-transparent">
                 AI-powered workspace
               </span>
             </h2>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-base md:text-xl text-gray-600 mb-8 leading-relaxed">
               Monitor clinical sites, detect delays & safety risks, and get AI-assisted explanations in one 
               sleek interface. Responsive dashboards keep every action reachable on any device.
             </p>
             <div className="flex flex-wrap gap-4 mb-12">
               <button 
                 onClick={() => navigate('/login')}
-                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+                className="px-6 py-3 md:px-8 md:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-base md:text-lg shadow-lg hover:shadow-xl transition-all"
               >
                 Register as Manager
               </button>
               <button 
                 onClick={() => navigate('/login')}
-                className="px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+                className="px-6 py-3 md:px-8 md:py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold text-base md:text-lg shadow-lg hover:shadow-xl transition-all"
               >
                 Register as Clinic
               </button>
               <button 
                 onClick={() => navigate('/login')}
-                className="px-8 py-4 bg-white hover:bg-gray-50 text-blue-600 border-2 border-blue-600 rounded-xl font-bold text-lg transition-all"
+                className="px-6 py-3 md:px-8 md:py-4 bg-white hover:bg-gray-50 text-blue-600 border-2 border-blue-600 rounded-xl font-bold text-base md:text-lg transition-all"
               >
                 Login
               </button>
@@ -78,10 +80,10 @@ const LandingPage = () => {
         <ScrollFloat delay={200}>
           <GlareHover>
             <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
-              <div className="flex items-center justify-between mb-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6">
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Live monitoring snapshot</p>
-                  <h3 className="text-2xl font-bold text-gray-900">Clinic Site #23 • Trial CTM-2025</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900">Clinic Site #23 • Trial CTM-2025</h3>
                 </div>
                 <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold">On Track</span>
               </div>
@@ -116,7 +118,7 @@ const LandingPage = () => {
       {/* Features Section */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl font-bold text-center mb-4">
+          <h2 className="text-2xl md:text-5xl font-bold text-center mb-4">
             Your all-in-one{' '}
             <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
               monitoring companion
@@ -166,7 +168,7 @@ const LandingPage = () => {
       {/* Steps Section */}
       <section className="max-w-7xl mx-auto px-6 py-16">
         <div className="bg-white rounded-3xl shadow-xl p-12 border border-gray-100">
-          <h2 className="text-4xl font-bold text-center mb-12">
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-12">
             Get started in{' '}
             <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
               3 simple steps
@@ -244,7 +246,7 @@ const LandingPage = () => {
       {/* About Section */}
       <section className="max-w-7xl mx-auto px-6 py-16">
         <div className="bg-white rounded-3xl shadow-xl p-12 border border-gray-100">
-          <h2 className="text-4xl font-bold text-center mb-6">About this platform</h2>
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-6">About this platform</h2>
           <p className="text-center text-gray-600 max-w-3xl mx-auto mb-6">
             This web portal is exclusively for clinical trial staff—managers and site coordinators. Use it to manage 
             approvals, monitor site progress, and access trial-level insights. Patient data submission happens through 
@@ -284,7 +286,7 @@ const LandingPage = () => {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-gray-400">© 2026 Clinical Trial Monitor. Demo platform for hackathon presentation.</p>
+          <p className="text-gray-400">© 2026 TrialGuard AI. Demo platform for hackathon presentation.</p>
         </div>
       </footer>
     </div>
